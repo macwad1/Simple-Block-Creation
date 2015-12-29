@@ -1,3 +1,6 @@
+using UnityEngine;
+using System.Collections;
+
 public class Block : MonoBehaviour {
 	public Vector3[] vertex = new Vector3[]
 	{
