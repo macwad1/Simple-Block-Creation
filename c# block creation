@@ -67,7 +67,6 @@ public class LandGeneration : MonoBehaviour {
 
 		transform.gameObject.AddComponent<MeshFilter> ();
 		transform.gameObject.AddComponent<MeshRenderer> ();
-		transform.gameObject.AddComponent<Rigidbody> ();
 
 		transform.GetComponent<MeshFilter> ().mesh = mesh;
 
@@ -75,7 +74,7 @@ public class LandGeneration : MonoBehaviour {
 		rend.enabled = true;
 		rend.sharedMaterial = material;
 
-		transform.gameObject.GetComponent<Rigidbody> ().useGravity = false;
+
 
 		mesh.name = "MyOwnObject";
 
@@ -84,6 +83,8 @@ public class LandGeneration : MonoBehaviour {
 
 		mesh.RecalculateNormals ();
 		mesh.Optimize ();
+
+		transform.gameObject.AddComponent<MeshCollider> ();
 	}
 
 	// Update is called once per frame
