@@ -1,0 +1,51 @@
+using UnityEngine;
+using System.Collections;
+
+public class Player : MonoBehaviour {
+
+	public Transform Platform;
+	public Quaternion q;
+	int count = 0;
+	private float speed = 6.0f;
+	public Rigidbody rb;
+	// Use this for initialization
+	void Start () {
+
+
+		rb = GetComponent<Rigidbody> ();
+		transform.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+		rb.velocity = new Vector3 (0, 0, 0);
+
+	}
+
+	// Update is called once per frame
+	void Update () {
+		if (Input.GetKey(KeyCode.D)){
+			transform.position += Vector3.back * speed * Time.deltaTime;
+		}
+		if (Input.GetKey(KeyCode.A)){
+			transform.position += Vector3.forward * speed * Time.deltaTime;
+		}
+		if (Input.GetKey(KeyCode.W)){
+			transform.position += Vector3.right * speed * Time.deltaTime;
+		}
+		if (Input.GetKey(KeyCode.S)){
+			transform.position += Vector3.left * speed * Time.deltaTime;
+		}
+		if (rb.velocity.y <= 0.005f && rb.velocity.y >= -0.005f ) {
+			if (Input.GetKey (KeyCode.Space)) {
+				rb.velocity = new Vector3 (0,10, 0);
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.E)) {
+			if (count =< 4) {
+				count++;
+				Instantiate (Platform, new Vector3 (transform.position.x + 5, transform.position.y - .5f, 0), Quaternion.identity);
+			}
+		}
+
+		rb.velocity -= new Vector3 (0, .25f, 0);
+
+	}
+}
